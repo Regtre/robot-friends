@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Blanka';
+    src: url('Blanka-Regular.otf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+h1 {
+    font-family: Blanka, serif;
+    font-weight: 200;
+    color: #61ffec;
+}
