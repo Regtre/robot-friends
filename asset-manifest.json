@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/robot-friends/static/css/main.2fa1ea44.css",
+    "main.js": "/robot-friends/static/js/main.a751c7a9.js",
+    "static/media/Blanka-Regular.otf": "/robot-friends/static/media/Blanka-Regular.16f6265b20de0db4a921.otf",
+    "index.html": "/robot-friends/index.html",
+    "main.2fa1ea44.css.map": "/robot-friends/static/css/main.2fa1ea44.css.map",
+    "main.a751c7a9.js.map": "/robot-friends/static/js/main.a751c7a9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2fa1ea44.css",
+    "static/js/main.a751c7a9.js"
+  ]
+}
