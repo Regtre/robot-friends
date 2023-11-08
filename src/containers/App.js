@@ -1,35 +1,34 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import '../styles/App.css';
 import CardList from "../components/CardList";
 import Scroll from "../components/Scroll"
 import ErrorBoundry from "../components/ErrorBoundry"
-import SearchBox from "../components/SearchBox";
+import SearchBox from "../features/searchRobots/SearchBox";
+import {useSelector} from "react-redux";
+import {useGetPostsQuery} from '../features/api/apiRobot'
 
-function App() {
+const App = () => {
 
-    const [robots, setRobots] = useState([]);
-    const [filter, setFilter] = useState('');
+    const searchR = useSelector((state) => state.searchRobot.value)
 
+    const {
+        data: posts,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetPostsQuery()
+    let content
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => setRobots(users))
-    }, [])
-
-    const handleSearchChange = (e) => {
-        setFilter(e.target.value);
-    }
-
-    const filteredRobots = robots.filter(robot =>
-        robot.name.toLowerCase().includes(filter.toLowerCase()))
-
-    return !robots.length ?
-        <h1 className={'f1 tc'}>Loading</h1> :
-        (
+    if (isLoading) {
+        content = <h1 className={'f1 tc'}>Loading</h1>
+    } else if (isSuccess) {
+        const filteredRobots = posts.filter(robot =>
+            robot.name.toLowerCase().includes(searchR.toLowerCase()))
+        content = (
             <div className={'tc'}>
-                <h1 className={'f1'}>Robot friends</h1>
-                <SearchBox searchChange={handleSearchChange}></SearchBox>
+                <h1 className={'f1'}>Mes amis robots</h1>
+                <SearchBox></SearchBox>
                 <Scroll>
                     <ErrorBoundry>
                         <CardList robots={filteredRobots}/>
@@ -37,6 +36,17 @@ function App() {
                 </Scroll>
             </div>
         )
+
+    } else if (isError) {
+        content = <div>{error.toString()}</div>
+    }
+
+    return(
+        <div>
+            {content}
+        </div>
+    )
+
 
 
 }
